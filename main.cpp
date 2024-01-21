@@ -14,9 +14,6 @@ struct Animation
         
     std::vector<char> frames;
 
-
-    bool taskIsDone = false;
-
         
     void init() 
     {
