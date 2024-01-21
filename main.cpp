@@ -64,6 +64,13 @@ struct Animation
 
     }
 
+    long long factorial_test(int n) {
+    if (n <= 1) {
+        return 1;
+    }
+    return n * factorial_test(n - 1);
+}
+
         
 };
 
@@ -80,12 +87,7 @@ void async_animation()
     }
 }
 
-long long factorial(int n) {
-    if (n <= 1) {
-        return 1;
-    }
-    return n * factorial(n - 1);
-}
+
 
 
 
@@ -101,7 +103,7 @@ int main()
 
     
     for (int i = 0; i < 20000; ++i) {
-        factorial(i);
+        Loading.factorial_test(i);
     }
 
 
