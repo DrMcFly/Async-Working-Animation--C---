@@ -3,12 +3,17 @@
 #include<random>
 #include<chrono>
 #include<thread>
+#include<atomic>
 #include</home/martin/Code/CPP/Header_Files/TerminalColors.h>
+
+
+std::atomic<bool> stopThread(false);
 
 struct Animation
 {
         
     std::vector<char> frames;
+
 
     bool taskIsDone = false;
 
@@ -52,6 +57,12 @@ struct Animation
 
     }
 
+    void isComplete()
+    {
+        system("clear");
+        std::cout << "Done!" << std::endl;
+    }
+
         
 };
 
@@ -69,29 +80,46 @@ void async_animation()
 
     Loading.init();
    
-    while(!Loading.taskIsDone) {
+    while(!stopThread.load()) {
         
         animate();
         
     }
 }
 
+long long factorial(int n) {
+    if (n <= 1) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+}
+
 int main() 
 {
     
-
+    Animation Loading;
     
 
     // Loading.taskIsDone = true;
 
     std::thread loading_thread(async_animation);
-
     
-
-
     
+    
+    for (int i = 0; i < 20000; ++i) {
+        factorial(i);
+    }
+
+    stopThread = true;
 
     loading_thread.join();
 
-}
+    Loading.isComplete();
 
+    std::cin.get();
+
+    system("clear");
+
+    return 1;
+
+}
