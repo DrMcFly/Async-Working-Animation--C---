@@ -4,7 +4,7 @@
 #include<chrono>
 #include<thread>
 #include<atomic>
-#include</home/martin/Code/CPP/Header_Files/TerminalColors.h>
+// #include</home/martin/Code/CPP/Header_Files/TerminalColors.h>
 
 
 std::atomic<bool> stopThread(false);
@@ -22,27 +22,21 @@ struct Animation
         frames.push_back('-');
         frames.push_back('\\');
     }
-        
-        
-    // void addCharacter(char newChar) 
-    // {
-    //     frames.push_back(newChar);
-    // }
 
     void cycle() 
     {
 
-        using namespace std::this_thread;     // sleep_for, sleep_until
-        using namespace std::chrono_literals; // ns, us, ms, s, h, etc.
+        using namespace std::this_thread;
+        using namespace std::chrono_literals;
         using std::chrono::system_clock;
+
+        frames.push_back('|');
+        frames.push_back('/');
+        frames.push_back('-');
+        frames.push_back('\\');
 
         for(int i = 3; i >= 0; i--)
         {
-
-            frames.push_back('|');
-            frames.push_back('/');
-            frames.push_back('-');
-            frames.push_back('\\');
 
             system("clear");
             std::cout << "Working ";
@@ -64,31 +58,21 @@ struct Animation
 
     }
 
-    long long factorial_test(int n) {
-    if (n <= 1) {
-        return 1;
-    }
-    return n * factorial_test(n - 1);
-}
+    long long factorial_test(int n) 
+    {
 
+        if (n <= 1) 
+        {
+            return 1;
+        }
+
+        return n * factorial_test(n - 1);
+    }
         
 };
 
-void async_animation()
-{
-    Animation Loading;
 
-    Loading.init();
-   
-    while(!stopThread.load()) {
-        
-        Loading.cycle();
-        
-    }
-}
-
-
-
+void async_animation();
 
 
 int main() 
@@ -122,4 +106,16 @@ int main()
 
     return 1;
 
+}
+
+
+void async_animation()
+{
+    Animation Loading;
+   
+    while(!stopThread.load()) {
+        
+        Loading.cycle();
+        
+    }
 }
