@@ -15,13 +15,15 @@ struct Animation
     std::vector<char> frames;
 
         
-    void init() 
-    {
-        frames.push_back('|');
-        frames.push_back('/');
-        frames.push_back('-');
-        frames.push_back('\\');
-    }
+    // void init() // doesn't want to pushback on a vector in a struct?
+    // {
+
+    //     frames.push_back('|');
+    //     frames.push_back('/');
+    //     frames.push_back('-');
+    //     frames.push_back('\\');
+
+    // }
 
     void cycle() 
     {
@@ -53,7 +55,6 @@ struct Animation
     {
 
         system("clear");
-
         std::cout << "Done!" << std::endl;
 
     }
@@ -81,27 +82,16 @@ int main()
     Animation Loading;
     
     std::thread loading_thread(async_animation);
-
-
-
-
     
     for (int i = 0; i < 20000; ++i) {
         Loading.factorial_test(i);
     }
 
-
-
-
-
     stopThread = true;
-
     loading_thread.join();
-
     Loading.isComplete();
 
     std::cin.get();
-
     system("clear");
 
     return 1;
