@@ -46,6 +46,7 @@ struct Animation
 
             system("clear");
             std::cout << "Working ";
+
             auto interval = 200ms;
             std::cout << frames.at(i) << std::endl; 
             std::this_thread::sleep_for(interval);
@@ -56,20 +57,15 @@ struct Animation
 
     void isComplete()
     {
+
         system("clear");
+
         std::cout << "Done!" << std::endl;
+
     }
 
         
 };
-
-void animate() 
-{
-    Animation Loading;
-
-    Loading.cycle();
-
-}
 
 void async_animation()
 {
@@ -79,7 +75,7 @@ void async_animation()
    
     while(!stopThread.load()) {
         
-        animate();
+        Loading.cycle();
         
     }
 }
@@ -91,21 +87,26 @@ long long factorial(int n) {
     return n * factorial(n - 1);
 }
 
+
+
 int main() 
 {
     
     Animation Loading;
     
-
-    // Loading.taskIsDone = true;
-
     std::thread loading_thread(async_animation);
-    
-    
+
+
+
+
     
     for (int i = 0; i < 20000; ++i) {
         factorial(i);
     }
+
+
+
+
 
     stopThread = true;
 
